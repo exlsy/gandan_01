@@ -21,7 +21,7 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
   void initState() {
     super.initState();
 
-    startTimer();
+    // startTimer();
     reset();
   }
 
@@ -41,22 +41,49 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
     setState(() {
       final seconds = duration.inSeconds + addSeconds;
 
-      duration = Duration(seconds: seconds);
+      if (seconds < 0) {
+        timer?.cancel();
+      } else {
+        duration = Duration(seconds: seconds);
+      }
     });
   }
 
-  void startTimer() {
+  void startTimer({bool resets = true}) {
+    if (resets) {
+      reset();
+    }
+
     timer = Timer.periodic(
       Duration(seconds: 1),
       (_) => addTime(),
     );
   }
 
+  void stopTimer({bool resets = true}) {
+    if (resets) {
+      reset();
+    }
+
+    setState(() {
+      timer?.cancel();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
       title: '/countdown',
-      body: Center(child: buildTime()),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildTime(),
+          SizedBox(
+            height: 80,
+          ),
+          buildButtons(),
+        ],
+      ),
     );
   }
 
@@ -118,4 +145,46 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
           Text(header),
         ],
       );
+
+  Widget buildButtons() {
+    final isRunning = timer == null ? false : timer!.isActive;
+    final isCompleted =
+        (duration == countdownDuration || duration.inSeconds == 0);
+
+    print('isRunning $isRunning');
+    print('isCompleted $isCompleted');
+
+    return isRunning || !isCompleted
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                child: Text(isRunning ? 'STOP' : 'RESUME'),
+                style: ElevatedButton.styleFrom(),
+                onPressed: () {
+                  if (isRunning) {
+                    stopTimer(resets: false);
+                  } else {
+                    startTimer(resets: false);
+                  }
+                },
+              ),
+              SizedBox(
+                width: 12,
+              ),
+              ElevatedButton(
+                child: Text('CANCEL'),
+                style: ElevatedButton.styleFrom(),
+                onPressed: stopTimer,
+              ),
+            ],
+          )
+        : ElevatedButton(
+            child: Text('Start Timer'),
+            style: ElevatedButton.styleFrom(),
+            onPressed: () {
+              startTimer();
+            },
+          );
+  }
 }
