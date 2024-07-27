@@ -1,3 +1,4 @@
+import 'package:gandan_01/screen/calendar_screen.dart';
 import 'package:gandan_01/screen/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,6 +23,12 @@ final router = GoRouter(
           path: 'countdown',
           builder: (context, state) {
             return CountdownTimerScreen();
+          },
+        ),
+        GoRoute(
+          path: 'calendar',
+          builder: (context, state) {
+            return CalendarScreen();
           },
         ),
       ],

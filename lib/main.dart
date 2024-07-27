@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gandan_01/route/route.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDateFormatting();
+
   // debugPaintSizeEnabled = true;
   runApp(
     _App(),
@@ -14,6 +19,9 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'NotoSans',
+      ),
       routerConfig: router,
     );
   }

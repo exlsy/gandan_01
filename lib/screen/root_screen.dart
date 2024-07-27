@@ -23,6 +23,12 @@ class RootScreen extends StatelessWidget {
               },
               child: Text('Go CountdownTimer'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/calendar');
+              },
+              child: Text('Go Calendar'),
+            ),
           ],
         ));
   }
