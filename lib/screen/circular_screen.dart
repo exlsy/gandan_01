@@ -51,7 +51,7 @@ class CircularScreen extends StatelessWidget {
               backgroundColor: Colors.grey,
               progressColor: Colors.yellow,
             ),
-            new CircularPercentIndicator(
+            CircularPercentIndicator(
               radius: 110.0,
               lineWidth: 13.0,
               animation: true,
@@ -68,6 +68,24 @@ class CircularScreen extends StatelessWidget {
               ),
               circularStrokeCap: CircularStrokeCap.round,
               progressColor: Colors.purple,
+            ),
+            CircularPercentIndicator(
+              radius: 200.0,
+              lineWidth: 13.0,
+              percent: 0.0, // 현재 진행률
+              center: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("ELAPSED TIME"),
+                  Text(
+                    "00:01:06",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Text("REMAINING"),
+                  Text("15:58:53", style: TextStyle(fontSize: 24)),
+                ],
+              ),
+              progressColor: Colors.green,
             ),
           ],
         ),

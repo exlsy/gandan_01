@@ -19,6 +19,12 @@ class RootScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                context.go('/circularprogress');
+              },
+              child: Text('Go Circular Progress'),
+            ),
+            ElevatedButton(
+              onPressed: () {
                 context.go('/countdown');
               },
               child: Text('Go CountdownTimer'),
@@ -28,6 +34,12 @@ class RootScreen extends StatelessWidget {
                 context.go('/calendar');
               },
               child: Text('Go Calendar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/wave');
+              },
+              child: Text('Go Wave'),
             ),
           ],
         ));
