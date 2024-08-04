@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../screen/circular_screen.dart';
 import '../screen/countdown_timer_screen.dart';
+import '../screen/local_database_screen.dart';
 import '../screen/settings_screen.dart';
 import '../screen/wave_screen.dart';
 
@@ -44,6 +45,12 @@ final router = GoRouter(
           path: 'wave',
           builder: (context, state) {
             return WaveScreen();
+          },
+        ),
+        GoRoute(
+          path: 'localdb',
+          builder: (context, state) {
+            return LocalDatabaseScreen();
           },
         ),
         GoRoute(

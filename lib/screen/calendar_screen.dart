@@ -28,10 +28,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         foregroundColor: primaryColor,
         backgroundColor: Colors.white,
         onPressed: () {},
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
-        shape: CircleBorder(
+        shape: const CircleBorder(
           side: BorderSide(
             width: 3.0,
             color: Colors.blue,

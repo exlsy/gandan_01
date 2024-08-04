@@ -41,6 +41,12 @@ class RootScreen extends StatelessWidget {
               },
               child: Text('Go Wave'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/localdb');
+              },
+              child: Text('Go LocalDatabase'),
+            ),
           ],
         ));
   }
