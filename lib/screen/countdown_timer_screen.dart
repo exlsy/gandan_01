@@ -11,7 +11,7 @@ class CountdownTimerScreen extends StatefulWidget {
 }
 
 class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
-  static const countdownDuration = Duration(minutes: 10);
+  static const countdownDuration = Duration(hours: 1, minutes: 10);
   Duration duration = Duration();
   Timer? timer;
 
