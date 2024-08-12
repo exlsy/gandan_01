@@ -42,7 +42,7 @@ class _CircularProgressIndicatorWithDotState
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3600),
+      duration: Duration(seconds: 100),
     );
 
     _controller.value = widget.progress;
@@ -75,7 +75,7 @@ class _CircularProgressIndicatorWithDotState
             child: Text(
               '${(_controller.value * 100).toInt()}%',
               style: TextStyle(
-                fontSize: 16, // 폰트 크기를 원 크기에 맞게 줄임
+                fontSize: 26, // 폰트 크기를 원 크기에 맞게 줄임
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -93,6 +93,7 @@ class CircularTimerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    //print('${progress}');
     Paint circlePaint = Paint()
       ..color = Colors.grey.shade200
       ..strokeWidth = 20
@@ -118,8 +119,34 @@ class CircularTimerPainter extends CustomPainter {
 
     double dotX = center.dx + radius * cos(sweepAngle - pi / 2);
     double dotY = center.dy + radius * sin(sweepAngle - pi / 2);
+    Offset dotPosition = Offset(dotX, dotY);
 
-    canvas.drawCircle(Offset(dotX, dotY), 15, dotPaint);
+    canvas.drawCircle(Offset(dotX, dotY), 20, dotPaint);
+
+    // Draw percentage text inside the dot
+    final textStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 15,
+      fontWeight: FontWeight.bold,
+    );
+    final textSpan = TextSpan(
+      text: '${(progress * 100).toInt()}%',
+      style: textStyle,
+    );
+    final textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout(
+      minWidth: 0,
+      maxWidth: size.width,
+    );
+    final textWidth = textPainter.width;
+    final textHeight = textPainter.height;
+    textPainter.paint(
+        canvas,
+        Offset(
+            dotPosition.dx - textWidth / 2, dotPosition.dy - textHeight / 2));
   }
 
   @override
